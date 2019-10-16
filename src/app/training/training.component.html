@@ -1,0 +1,57 @@
+<div class="container">
+        <form [formGroup]="trainingForm" (ngSubmit)="onFormSubmit(trainingForm.value)">
+                <table class="table" >
+                  <tr>
+                    <td class="tbl1">
+                        <div class="form-group">
+                            <div class="input-group">
+                      <input formControlName="TrainingName" title="Enter Employee Name"  placeholder="Training Name">
+                      <span *ngIf="!trainingForm.get('TrainingName').value && trainingForm.get('TrainingName').touched"></span>
+                      </div>
+                      </div>
+                    </td>
+                    <td class="tbl1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control"  formControlName="StartDate"   type="date" useValueAsDate />
+                            </div>
+                          </div>
+                    </td>
+                      <td class="tbl1">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <input class="form-control" formControlName="EndDate" type="date" useValueAsDate />
+                            </div>
+                          </div>
+                      </td>
+                    </tr>
+                  <tr align="right">
+                    <td colspan="3"  class="content-center">
+                      <button type="submit"  color="accent" title="Click Submit Button" [disabled]="!trainingForm.valid">Submit</button>
+                      <button type="reset"  color="accent" title="Click Reset Button" (click)="resetForm()">Reset</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
+                        {{massage}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+    <br><br>
+          <table class="table" >
+              <tr ngclass="btn-primary" class="thead-dark">
+                <th scope="col">Training Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+              </tr>
+              <tr *ngFor="let training of allTrainings | async">
+                <td scope="row">{{training.TrainingName}}</td>
+                <td scope="row">{{training.StartDate | date }}</td>
+                <td scope="row">{{training.EndDate | date }}</td>
+              </tr>
+
+            </table>
+        </form>
+    </div>
